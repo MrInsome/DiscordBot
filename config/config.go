@@ -7,15 +7,13 @@ import (
 )
 
 var (
-	Token     string
-	BotPrefix string
+	Token string
 
 	config *configStruct
 )
 
 type configStruct struct {
-	Token  string `json:"token"`
-	Prefix string `json:"prefix"`
+	Token string `json:"token"`
 }
 
 func ReadConfig() error {
@@ -35,6 +33,5 @@ func ReadConfig() error {
 	}
 
 	Token = config.Token
-	BotPrefix = config.Prefix
 	return nil
 }

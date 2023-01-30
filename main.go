@@ -13,9 +13,6 @@ func main() {
 		fmt.Println(err.Error)
 		return
 	}
-
 	bot.Start()
 
-	<-make(chan struct{})
-	return
 }
