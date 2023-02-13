@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"log"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
 var BotID string
@@ -24,6 +27,9 @@ func Start() {
 	}
 
 	fmt.Println("Бот запущен.  Нажмите 'CTRL-C' для выхода.")
-	<-make(chan struct{})
-	return
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
+	<-sc
+
+	dg.Close()
 }
