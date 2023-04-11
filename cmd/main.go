@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Discord_bot/bot"
-	"Discord_bot/config"
+	"Discord_bot/pkg/bot"
+	"Discord_bot/pkg/config"
 	"fmt"
 )
 

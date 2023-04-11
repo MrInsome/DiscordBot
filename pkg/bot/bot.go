@@ -1,7 +1,7 @@
 package bot
 
 import (
-	"Discord_bot/config"
+	"Discord_bot/pkg/config"
 	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"log"
