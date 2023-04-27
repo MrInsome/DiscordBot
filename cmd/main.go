@@ -1,18 +1,33 @@
 package main
 
 import (
-	"Discord_bot/pkg/bot"
-	"Discord_bot/pkg/config"
+	"Discord_bot/internal/config"
+	"Discord_bot/internal/discord"
 	"fmt"
+	"log"
 )
 
 func main() {
-	err := config.ReadConfig()
-
+	conf, err := config.Init("config")
 	if err != nil {
-		fmt.Println(err.Error)
+		log.Fatalf("Ошибка инициализации файла конфигурации : %s", err.Error())
 		return
 	}
-	bot.Start()
+	dg, err := discord.NewDiscordSession(conf)
+	if err != nil {
+		log.Fatalf("Ошибка при создании сессии Discord: %s", err.Error())
+		return
+	}
 
+	//commands.GetBotServers(dg)
+	//commands.GetBotChannels(dg)
+
+	err = dg.InitSession()
+	if err != nil {
+		log.Fatalf("Ошибка при открытии сессии Discord: ", err.Error())
+		return
+	}
+	dg.InitCommands()
+	fmt.Println("Бот запущен. Нажмите CTRL-C для выхода.")
+	<-make(chan struct{})
 }
