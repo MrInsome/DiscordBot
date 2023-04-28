@@ -2,10 +2,20 @@ package main
 
 import (
 	"Discord_bot/internal/config"
-	"Discord_bot/internal/discord"
+	"Discord_bot/internal/services"
+	"Discord_bot/internal/services/discord"
 	"fmt"
+	"github.com/sirupsen/logrus"
 	"log"
+	"os"
+	"os/signal"
+	"syscall"
 )
+
+func init() {
+	logrus.SetFormatter(&logrus.JSONFormatter{})
+	logrus.SetLevel(logrus.DebugLevel)
+}
 
 func main() {
 	conf, err := config.Init("config")
@@ -13,21 +23,29 @@ func main() {
 		log.Fatalf("Ошибка инициализации файла конфигурации : %s", err.Error())
 		return
 	}
-	dg, err := discord.NewDiscordSession(conf)
+
+	newServices, err := services.NewServices(conf)
 	if err != nil {
-		log.Fatalf("Ошибка при создании сессии Discord: %s", err.Error())
+		log.Fatalf("Ошибка при создании сервисов: %s", err.Error())
+	}
+
+	cord := discord.NewCordSession(newServices)
+
+	err = cord.InitHandlers()
+	if err != nil {
+		log.Fatalf("Ошибка при инициализации хендлеров: ", err.Error())
 		return
 	}
 
-	//commands.GetBotServers(dg)
-	//commands.GetBotChannels(dg)
-
-	err = dg.InitSession()
+	err = cord.InitCommands()
 	if err != nil {
-		log.Fatalf("Ошибка при открытии сессии Discord: ", err.Error())
+		log.Fatalf("Ошибка при инициализации команд: ", err.Error())
 		return
 	}
-	dg.InitCommands()
+
 	fmt.Println("Бот запущен. Нажмите CTRL-C для выхода.")
-	<-make(chan struct{})
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	<-quit
 }

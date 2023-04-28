@@ -1,14 +1,14 @@
 package discord
 
 import (
-	"fmt"
 	"github.com/bwmarrin/discordgo"
+	"log"
 )
 
 func Ready(dg *discordgo.Session, event *discordgo.Ready) {
 	_, err := dg.ChannelMessageSend("1065951600541179987", "Бот запущен")
 	if err != nil {
-		fmt.Println("Ошибка при отправке сообщения в канал:", err)
+		log.Printf("Ошибка при отправке сообщения в канал: %s", err)
 	}
 }
 

@@ -5,7 +5,7 @@ import (
 )
 
 func (cord *CordSession) GetBotServers() {
-	guilds, err := cord.dg.UserGuilds(10, "", "")
+	guilds, err := cord.UserGuilds(10, "", "")
 	if err != nil {
 		fmt.Println("Ошибка при получении списка серверов:", err)
 		return
