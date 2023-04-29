@@ -21,6 +21,6 @@ func NewServices(configs *config.Configs) (*Services, error) {
 	return &Services{
 		Session:       dg,
 		Configs:       configs,
-		ErrorContract: errors.NewDiscordErrors(),
+		ErrorContract: errors.NewDiscordErrors(dg),
 	}, nil
 }

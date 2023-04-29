@@ -13,12 +13,12 @@ func NewCordSession(services *services.Services) *CordSession {
 }
 
 func (cord *CordSession) InitHandlers() error {
-	//cord.dg.AddHandler(Ready)
+	//cord.dg.AddHandler(cord.Ready)
 
-	cord.AddHandler(VoiceState)
-	cord.AddHandler(VoiceUsersFunc)
+	cord.AddHandler(cord.VoiceState)
+	cord.AddHandler(cord.VoiceUsersFunc)
 
-	cord.AddHandler(CommandHello)
+	cord.AddHandler(cord.CommandHello)
 
 	err := cord.Open()
 	if err != nil {

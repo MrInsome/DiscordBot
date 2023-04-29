@@ -9,7 +9,7 @@ import (
 
 var VoiceUsers = make(map[string]bool)
 
-func VoiceState(ds *discordgo.Session, vs *discordgo.VoiceStateUpdate) {
+func (cord *CordSession) VoiceState(ds *discordgo.Session, vs *discordgo.VoiceStateUpdate) {
 	if vs.GuildID != "1065951599891071046" {
 		return
 	}
@@ -20,10 +20,11 @@ func VoiceState(ds *discordgo.Session, vs *discordgo.VoiceStateUpdate) {
 	}
 }
 
-func VoiceUsersFunc(dg *discordgo.Session, i *discordgo.InteractionCreate) {
+func (cord *CordSession) VoiceUsersFunc(dg *discordgo.Session, i *discordgo.InteractionCreate) {
 	if i.ApplicationCommandData().Name == "uvoice" {
 		channel, err := dg.State.Channel(i.ChannelID)
 		if err != nil {
+			cord.ErrorContract.TestErr(err, i)
 			log.Printf("Ошибка получения канала от DG : %s", err)
 			return
 		}
@@ -63,7 +64,7 @@ func VoiceUsersFunc(dg *discordgo.Session, i *discordgo.InteractionCreate) {
 				color := rand.Intn(16777215)
 
 				avatarURL := user.AvatarURL("")
-				embed := &discordgo.MessageEmbed{Color: color, Title: user.Username + "\n" + user.ID, Image: &discordgo.MessageEmbedImage{
+				embed := &discordgo.MessageEmbed{Color: color, Title: "**" + user.Username + "**" + "\n" + "||" + user.ID + "||", Image: &discordgo.MessageEmbedImage{
 					URL: avatarURL,
 				}}
 

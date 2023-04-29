@@ -10,8 +10,8 @@ type DiscordErrors struct {
 	dErr contracts.ErrorContract
 }
 
-func NewDiscordErrors() *DiscordErrors {
-	return &DiscordErrors{}
+func NewDiscordErrors(dg *discordgo.Session) *DiscordErrors {
+	return &DiscordErrors{Session: dg}
 }
 
 func (de *DiscordErrors) TestErr(err error, i *discordgo.InteractionCreate) {
