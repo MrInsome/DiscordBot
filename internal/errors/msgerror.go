@@ -14,7 +14,7 @@ func NewDiscordErrors(dg *discordgo.Session) *DiscordErrors {
 	return &DiscordErrors{Session: dg}
 }
 
-func (de *DiscordErrors) TestErr(err error, i *discordgo.InteractionCreate) {
+func (de *DiscordErrors) ErrorMessage(err error, i *discordgo.InteractionCreate) {
 	data := discordgo.InteractionResponseData{
 		Content: err.Error(),
 		Flags:   discordgo.MessageFlagsEphemeral,
@@ -24,4 +24,8 @@ func (de *DiscordErrors) TestErr(err error, i *discordgo.InteractionCreate) {
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &data,
 	})
+}
+
+func (de *DiscordErrors) DoSomething(arg string) {
+	println(arg)
 }

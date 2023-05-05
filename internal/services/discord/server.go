@@ -16,9 +16,8 @@ func (cord *CordSession) InitHandlers() error {
 	//cord.dg.AddHandler(cord.Ready)
 
 	cord.AddHandler(cord.VoiceState)
-	cord.AddHandler(cord.VoiceUsersFunc)
 
-	cord.AddHandler(cord.CommandHello)
+	cord.AddHandler(cord.ApplicationOrMessageComponent)
 
 	err := cord.Open()
 	if err != nil {

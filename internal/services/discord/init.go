@@ -14,6 +14,10 @@ func (cord *CordSession) InitCommands() error {
 			Name:        "uvoice",
 			Description: "Users",
 		},
+		{
+			Name:        "test",
+			Description: "test",
+		},
 	}
 
 	allcoms, _ := cord.ApplicationCommands(cord.State.User.ID, "")
@@ -30,5 +34,6 @@ func (cord *CordSession) InitCommands() error {
 			}
 		}
 	}
+
 	return nil
 }
