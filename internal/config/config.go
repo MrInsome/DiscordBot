@@ -11,6 +11,7 @@ type Configs struct {
 
 type BotToken struct {
 	Token string
+	AppID string
 }
 
 func Init(cfg string) (*Configs, error) {
@@ -20,5 +21,6 @@ func Init(cfg string) (*Configs, error) {
 	}
 
 	token := os.Getenv("DISCORD_BOT_TOKEN")
-	return &Configs{BotToken{Token: token}}, nil
+	appID := os.Getenv("APP_ID")
+	return &Configs{BotToken{Token: token, AppID: appID}}, nil
 }
