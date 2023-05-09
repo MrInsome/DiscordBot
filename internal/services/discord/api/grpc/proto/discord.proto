@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package discordgo;
+
+option go_package = "/internal/services/discord/api/grpc/gen";
+
+service BotService {
+  rpc RegisterCommand (RegisterCommandRequest) returns (RegisterCommandResponse) {}
+  rpc DeleteCommand (DeleteCommandRequest) returns (DeleteCommandResponse) {}
+}
+
+message RegisterCommandRequest {
+  string name = 1;
+  string description = 2;
+  string guildID = 3;
+}
+
+message RegisterCommandResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message DeleteCommandRequest {
+  string name = 1;
+  string guildID = 2;
+}
+
+message DeleteCommandResponse {
+  bool success = 1;
+  string message = 2;
+}
+

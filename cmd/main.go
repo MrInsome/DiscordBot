@@ -4,6 +4,7 @@ import (
 	"Discord_bot/internal/config"
 	"Discord_bot/internal/services"
 	"Discord_bot/internal/services/discord"
+	"Discord_bot/internal/services/discord/api/grpc"
 	"github.com/sirupsen/logrus"
 	"log"
 	"os"
@@ -30,15 +31,11 @@ func main() {
 
 	cord := discord.NewCordSession(newServices)
 
+	go grpc.Serve(cord)
+
 	err = cord.InitHandlers()
 	if err != nil {
 		log.Fatalf("Handlers init error: ", err.Error())
-		return
-	}
-
-	err = cord.InitCommands()
-	if err != nil {
-		log.Fatalf("Cannot create slash commands: %v ", err.Error())
 		return
 	}
 
@@ -50,8 +47,6 @@ func main() {
 
 	for _, guild := range servers {
 		log.Printf("name: %s - id: %s\n", guild.Name, guild.ID)
-		a, _ := cord.GetBotVoiceChannels(guild.ID)
-		log.Printf("%s\n", a[0])
 	}
 
 	quit := make(chan os.Signal, 1)

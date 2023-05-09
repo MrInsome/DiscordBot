@@ -30,9 +30,9 @@ func (c *Commands) UserVoice(s *discordgo.Session, i *discordgo.InteractionCreat
 				usersInVoice[vs.ChannelID] = []string{}
 			}
 			usersInVoice[vs.ChannelID] = append(usersInVoice[vs.ChannelID], vs.UserID)
-			log.Println(vs.ChannelID, vs.UserID)
 		}
 	}
+
 	data := discordgo.InteractionResponseData{}
 	for channelID, users := range usersInVoice {
 		channel, err = s.Channel(channelID)
