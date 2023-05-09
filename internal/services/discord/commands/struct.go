@@ -16,9 +16,11 @@ func NewCommands(dg *discordgo.Session) *Commands {
 
 func (c *Commands) RegisterCommands() map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	var commandsHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
-		"uvoice":  c.UserVoice,
-		"buttons": c.TestButtons,
-		"selects": c.Selects,
+		"uvoice": c.UserVoice,
+		"wakeup": c.WakeupCommand,
+
+		"buttons": c.TestButtons, //todo
+		"selects": c.Selects,     //todo
 	}
 	return commandsHandlers
 }

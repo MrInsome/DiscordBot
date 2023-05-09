@@ -128,19 +128,17 @@ func (c *Commands) Selects(s *discordgo.Session, i *discordgo.InteractionCreate)
 		response = &discordgo.InteractionResponse{
 			Type: discordgo.InteractionResponseChannelMessageWithSource,
 			Data: &discordgo.InteractionResponseData{
-				Content: "The tastiest things are left for the end. Meet auto populated select menus.\n" +
-					"By setting `MenuType` on the select menu you can tell Discord to automatically populate the menu with entities of your choice: roles, members, channels. Try one below.",
-				Flags: discordgo.MessageFlagsEphemeral,
+				Content: "Необходимо выбрать пользователя которого нужно разбудить.",
+				Flags:   discordgo.MessageFlagsEphemeral,
 				Components: []discordgo.MessageComponent{
 					discordgo.ActionsRow{
 						Components: []discordgo.MessageComponent{
 							discordgo.SelectMenu{
 								MenuType:     discordgo.UserSelectMenu,
 								CustomID:     "user_select",
-								Placeholder:  "Pick a user from the voice channels!",
+								Placeholder:  "Выбери пользователя",
 								MaxValues:    1,
 								ChannelTypes: []discordgo.ChannelType{discordgo.ChannelTypeGuildVoice},
-								//Options: ,
 							},
 						},
 					},
@@ -153,42 +151,3 @@ func (c *Commands) Selects(s *discordgo.Session, i *discordgo.InteractionCreate)
 		panic(err)
 	}
 }
-
-//func getUsersFromSameVoice(s *discordgo.Session, i *discordgo.InteractionCreate) []discordgo.SelectMenuOption{
-//
-//	// Find the voice channel that the user is in.
-//	voiceState, err := s.State.VoiceState(i.GuildID, i.Member.User.ID)
-//
-//	if err != nil {
-//		log.Println(err)
-//		return nil
-//	}
-//
-//	// Find all the users in the same voice channel.
-//	usersInVoice := make(map[string][]string)
-//
-//	for _, vs := range guild.VoiceStates {
-//		if vs.ChannelID != "" {
-//			if _, ok := usersInVoice[vs.ChannelID]; !ok {
-//				usersInVoice[vs.ChannelID] = []string{}
-//			}
-//			usersInVoice[vs.ChannelID] = append(usersInVoice[vs.ChannelID], vs.UserID)
-//		}
-//	}
-//
-//	// Create the select menu with the list of users.
-//	selectMenu := discordgo.SelectMenu{
-//		CustomID:    "user_select",
-//		Placeholder: "From the voice channel!",
-//		MaxValues:   1,
-//		Options:     []discordgo.SelectMenuOption{},
-//	}
-//	for _, user := range users {
-//		option := discordgo.SelectMenuOption{
-//			Label: user.Username,
-//			Value: user.ID,
-//		}
-//		selectMenu.Options = append(selectMenu.Options, option)
-//	}
-//	return selectMenu.Options
-//}

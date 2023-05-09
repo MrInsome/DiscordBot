@@ -3,6 +3,7 @@ package discord
 import (
 	"github.com/bwmarrin/discordgo"
 	"log"
+	"strings"
 )
 
 var VoiceUsers = make(map[string]bool)
@@ -33,8 +34,9 @@ func (cord *CordSession) ApplicationOrMessageComponent(s *discordgo.Session, i *
 			h(s, i)
 		}
 	case discordgo.InteractionMessageComponent:
+		data := strings.Split(i.MessageComponentData().CustomID, ".!")
 		componentsHandlers := cord.RegisterComponents()
-		if h, ok := componentsHandlers[i.MessageComponentData().CustomID]; ok {
+		if h, ok := componentsHandlers[data[0]]; ok {
 			h(s, i)
 		}
 	}

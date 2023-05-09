@@ -16,11 +16,13 @@ func NewComponents(dg *discordgo.Session) *Components {
 
 func (c *Components) RegisterComponents() map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	var componentsHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
-		"fd_no":              c.FdNo,
-		"fd_yes":             c.FdYes,
-		"select":             c.Select,
-		"stackoverflow_tags": c.StackTag,
-		"channel_select":     c.ChanSelect,
+		"user_select": c.UserSelect,
+		"wakeup":      c.Wakeuper,
+
+		"fd_no":              c.FdNo,     //todo
+		"fd_yes":             c.FdYes,    //todo
+		"select":             c.Select,   //todo
+		"stackoverflow_tags": c.StackTag, //todo
 	}
 	return componentsHandlers
 }

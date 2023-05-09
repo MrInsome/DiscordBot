@@ -2,6 +2,7 @@ package components
 
 import (
 	"github.com/bwmarrin/discordgo"
+	"log"
 	"time"
 )
 
@@ -9,6 +10,7 @@ func (c *Components) Select(s *discordgo.Session, i *discordgo.InteractionCreate
 	var response *discordgo.InteractionResponse
 
 	data := i.MessageComponentData()
+	log.Println(data.Values[0])
 	switch data.Values[0] {
 	case "go":
 		response = &discordgo.InteractionResponse{

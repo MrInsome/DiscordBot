@@ -16,7 +16,7 @@ type CommandsContract interface {
 
 type ComponentsContract interface {
 	RegisterComponents() map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate)
-	ChanSelect(s *discordgo.Session, i *discordgo.InteractionCreate)
+	UserSelect(s *discordgo.Session, i *discordgo.InteractionCreate)
 	FdNo(s *discordgo.Session, i *discordgo.InteractionCreate)
 	FdYes(s *discordgo.Session, i *discordgo.InteractionCreate)
 	Select(s *discordgo.Session, i *discordgo.InteractionCreate)
