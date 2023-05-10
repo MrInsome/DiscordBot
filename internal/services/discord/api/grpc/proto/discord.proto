@@ -13,6 +13,7 @@ message RegisterCommandRequest {
   string name = 1;
   string description = 2;
   string guildID = 3;
+string permissions = 4;
 }
 
 message RegisterCommandResponse {
