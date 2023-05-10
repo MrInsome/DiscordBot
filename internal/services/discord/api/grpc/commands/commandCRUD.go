@@ -17,7 +17,7 @@ func NewBotService(session *discord.CordSession) *botService {
 }
 
 func (s *botService) RegisterCommand(ctx context.Context, req *gen.RegisterCommandRequest) (*gen.RegisterCommandResponse, error) {
-	err := s.InitCom(req.Name, req.Description, req.GuildID)
+	err := s.InitCom(req.Name, req.Description, req.GuildID, req.Permissions)
 	if err != nil {
 		log.Printf("Cannot create slash command: %v ", err.Error())
 		return &gen.RegisterCommandResponse{Success: false}, err

@@ -4,10 +4,11 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func (cord *CordSession) InitCom(name string, description string, guildId string) error {
+func (cord *CordSession) InitCom(name string, description string, guildId string, permissions string) error {
 	var command discordgo.ApplicationCommand
 	command.Name = name
 	command.Description = description
+	//command.DefaultMemberPermissions = discordgo.PermissionSendMessages
 	_, err := cord.ApplicationCommandCreate(cord.State.User.ID, guildId, &command)
 	if err != nil {
 		return err
