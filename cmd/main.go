@@ -52,5 +52,5 @@ func main() {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT, os.Interrupt)
 	<-quit
-	log.Println("Shutdown...")
+	log.Println("Shutdown")
 }

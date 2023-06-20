@@ -24,5 +24,6 @@ COPY --from=builder /app/build/discordBot .
 COPY --from=builder /app/configs configs
 
 EXPOSE 8080
+EXPOSE 50051
 
 CMD ["/app/discordBot"]
