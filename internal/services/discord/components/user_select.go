@@ -36,7 +36,7 @@ func (c *Components) UserSelect(s *discordgo.Session, i *discordgo.InteractionCr
 							Label:    "Уничтожить",
 							Style:    discordgo.DangerButton,
 							Disabled: false,
-							CustomID: "wakeup.!3.!" + i.MessageComponentData().Values[0],
+							CustomID: "wakeup.!4.!" + i.MessageComponentData().Values[0],
 						},
 					},
 				},
